@@ -27,7 +27,12 @@ const connectDB = async () => {
 // Middleware
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+const corsOptions = {
+  origin: ['https://illustrious-selkie-e9a696.netlify.app', 'http://localhost:5173'], // Add both the Netlify and localhost URLs
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
